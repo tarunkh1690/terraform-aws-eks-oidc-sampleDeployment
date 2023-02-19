@@ -13,5 +13,13 @@ Steps -
 
 5- aws eks --region ${region} update-kubeconfig --name ${cluster_name] # replace regin & cluster_name.
 
-6- copy test-oidc arn from output and update in terraform-aws-eks-oidc-sampleDeployment/aws-test.yaml file in front of 'eks.amazonaws.com/role-arn'.
+6- kubectl get svc # to check cluster access
+
+7- copy test-oidc arn from output and update in terraform-aws-eks-oidc-sampleDeployment/aws-test.yaml file in front of 'eks.amazonaws.com/role-arn'.
+
+8- kubectl apply -f terraform-aws-eks-oidc-sampleDeployment/aws-test.yaml # To deploy awscli pod.
+
+9- kubectl exec aws-cli -- aws s3api list-buckets  # list s3 bucket to check s3 access from pod.
+
+
 
