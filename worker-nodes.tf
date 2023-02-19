@@ -28,6 +28,39 @@ resource "aws_iam_role_policy_attachment" "worker-nodes-AmazonEC2ContainerRegist
   role       = aws_iam_role.worker-nodes.name
 }
 
+resource "aws_iam_policy" "Amazon_EBS_CSI_Driver" {
+  name = "Amazon_EBS_CSI_Driver"
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ec2:AttachVolume",
+          "ec2:CreateSnapshot",
+          "ec2:CreateTags",
+          "ec2:CreateVolume",
+          "ec2:DeleteSnapshot",
+          "ec2:DeleteTags",
+          "ec2:DeleteVolume",
+          "ec2:DescribeInstances",
+          "ec2:DescribeSnapshots",
+          "ec2:DescribeTags",
+          "ec2:DescribeVolumes",
+          "ec2:DetachVolume"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "worker-nodes-AmazonEBSCSIDriver" {
+  policy_arn = aws_iam_policy.Amazon_EBS_CSI_Driver.arn
+  role       = aws_iam_role.worker-nodes.name
+}
+
 resource "aws_eks_node_group" "private-nodes" {
   #count = length(aws_subnet.k8s-private-subnet)
   cluster_name    = aws_eks_cluster.eksass.name
