@@ -40,12 +40,12 @@ resource "aws_route_table" "k8s-public-rt" {
   tags = {
     Name = "k8s-public-rt"
   }
-  depends_on = ["aws_subnet.k8s-public-subnet"]
+  depends_on = [aws_subnet.k8s-public-subnet]
 }
 
 resource "aws_route_table_association" "k8s-public-rta" {
   count          = length(data.aws_availability_zones.available.names)
   subnet_id      = element(aws_subnet.k8s-public-subnet.*.id, count.index)
   route_table_id = aws_route_table.k8s-public-rt.id
-  depends_on     = ["aws_subnet.k8s-public-subnet"]
+  depends_on     = [aws_subnet.k8s-public-subnet]
 }
