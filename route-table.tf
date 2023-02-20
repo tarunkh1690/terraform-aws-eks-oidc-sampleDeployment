@@ -12,7 +12,7 @@ resource "aws_route_table" "k8s-private-rt" {
   tags = {
     Name = "k8s-private-rt"
   }
-  depends_on = ["aws_subnet.k8s-private-subnet"]
+  depends_on = [aws_subnet.k8s-private-subnet]
 }
 
 
@@ -20,7 +20,7 @@ resource "aws_route_table_association" "k8s-private-rta" {
   count          = length(data.aws_availability_zones.available.names)
   subnet_id      = element(aws_subnet.k8s-private-subnet.*.id, count.index)
   route_table_id = aws_route_table.k8s-private-rt.id
-  depends_on     = ["aws_subnet.k8s-private-subnet"]
+  depends_on     = [aws_subnet.k8s-private-subnet]
 }
 
 

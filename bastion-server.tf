@@ -20,6 +20,6 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_iam_instance_profile" "k8s-profile" {
-  name  = "k8s-profile"
-  role  = aws_iam_role.worker-nodes.name
+  name = "k8s-profile"
+  role = aws_iam_role.worker-nodes.name
 }
