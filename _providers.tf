@@ -1,9 +1,9 @@
 
 provider "aws" {
   region     = var.aws_region
-  #assume_role {
-  #  role_arn = ""
-  #}
+  access_key = var.AWS_ACCESS_KEY_ID
+  secret_key = var.AWS_SECRET_ACCESS_KEY
+
 }
 
 terraform {
