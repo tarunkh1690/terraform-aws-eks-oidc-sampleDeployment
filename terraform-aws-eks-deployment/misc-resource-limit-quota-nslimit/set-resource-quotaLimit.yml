@@ -15,7 +15,7 @@ spec:
     requests.memory: 1Gi
     limits.cpu: "2"
     limits.memory: 2Gi  
-    pods: "2"    
+    pods: "1"    
     configmaps: "5" 
     persistentvolumeclaims: "5" 
     secrets: "5" 
@@ -27,6 +27,7 @@ apiVersion: v1 # String
 kind: Pod  # String
 metadata: # Dictionary
   name: myapp-pod3
+  namespace: dev3
   labels: # Dictionary 
     app: myapp-3        
 spec:
