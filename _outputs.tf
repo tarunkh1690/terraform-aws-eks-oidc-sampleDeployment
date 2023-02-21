@@ -18,7 +18,10 @@ output "public_subnet_cidr_blocks" {
   value = data.aws_subnet_ids.public.ids
 }
 
-output "private_key" {
-  value     = tls_private_key.sshkeys.private_key_pem
-  sensitive = true
+output "test_policy_arn" {
+  value = aws_iam_role.test_oidc.arn
+}
+
+output "eks_cluster_autoscaler_arn" {
+  value = aws_iam_role.eks_cluster_autoscaler.arn
 }

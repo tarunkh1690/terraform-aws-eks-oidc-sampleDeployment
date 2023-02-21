@@ -5,8 +5,6 @@ data "aws_subnet_ids" "example" {
   #depends_on = [time_sleep.wait_10_seconds_private]
 }
 
-
-
 data "aws_subnet_ids" "private" {
   vpc_id = aws_vpc.k8s-vpc.id
   filter {
