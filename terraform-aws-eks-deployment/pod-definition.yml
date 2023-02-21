@@ -12,5 +12,5 @@ spec:
         - containerPort: 80
   tolerations:
   - key:   "application"
-    value:  "Public"
+    value:  "Private"
     effect: "NoSchedule"
