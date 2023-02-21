@@ -107,7 +107,7 @@ resource "aws_eks_node_group" "private-nodes" {
   ]
 }
 
-resource "aws_eks_node_group" "public-nodes" {
+/* resource "aws_eks_node_group" "public-nodes" {
   cluster_name    = aws_eks_cluster.EKS-cluster.name
   node_group_name = "public-nodes"
   node_role_arn   = aws_iam_role.worker-nodes.arn
@@ -145,4 +145,4 @@ resource "aws_eks_node_group" "public-nodes" {
     aws_subnet.k8s-public-subnet,
     aws_security_group.k8s_cluster_sg,
   ]
-}
+}*/
