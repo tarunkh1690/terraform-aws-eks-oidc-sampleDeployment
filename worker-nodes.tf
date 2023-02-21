@@ -69,7 +69,7 @@ resource "aws_eks_node_group" "private-nodes" {
 
   #subnet_ids = [aws_subnet.k8s-private-subnet[count.index].id]
   #subnet_ids = data.aws_subnet_ids.private.ids
-  subnet_ids  = aws_subnet.k8s-private-subnet.id
+  subnet_ids  = aws_subnet.k8s-private-subnet[*].id
 
   capacity_type  = "ON_DEMAND"
   instance_types = ["t3.small"]
