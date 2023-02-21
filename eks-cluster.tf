@@ -1,4 +1,4 @@
-resource "aws_iam_role" "eksass" {
+resource "aws_iam_role" "EKS-cluster" {
   name = "eks-cluster-ass"
 
   assume_role_policy = <<POLICY
@@ -17,14 +17,14 @@ resource "aws_iam_role" "eksass" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "eksass-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "EKS-cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.eksass.name
+  role       = aws_iam_role.EKS-cluster.name
 }
 
-resource "aws_eks_cluster" "eksass" {
-  name     = "eksass"
-  role_arn = aws_iam_role.eksass.arn
+resource "aws_eks_cluster" "EKS-cluster" {
+  name     = "EKS-cluster"
+  role_arn = aws_iam_role.EKS-cluster.arn
 
   vpc_config {
     security_group_ids = [aws_security_group.k8s_cluster_sg.id]
@@ -32,7 +32,7 @@ resource "aws_eks_cluster" "eksass" {
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.eksass-AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.EKS-cluster-AmazonEKSClusterPolicy,
     aws_security_group.k8s_cluster_sg,
     aws_instance.bastion
   ]

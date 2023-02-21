@@ -11,7 +11,7 @@ resource "aws_subnet" "k8s-private-subnet" {
     Name                      = "k8s-private-subnet-${data.aws_availability_zones.available.names[count.index]}"
     subnet-type               = "private"
     kubernetes-role-elb       = "1"
-    kubernetes-cluster-eksass = "owned"
+    kubernetes-cluster-EKS-cluster = "owned"
   }
 }
 
@@ -29,6 +29,6 @@ resource "aws_subnet" "k8s-public-subnet" {
     Name                      = "k8s-public-subnet-${data.aws_availability_zones.available.names[count.index]}"
     subnet-type               = "public"
     kubernetes-role-elb       = "1"
-    kubernetes-cluster-eksass = "owned"
+    kubernetes-cluster-EKS-cluster = "owned"
   }
 }
