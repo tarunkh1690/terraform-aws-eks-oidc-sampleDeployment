@@ -30,8 +30,8 @@ resource "aws_eks_cluster" "eksass" {
     security_group_ids = [aws_security_group.k8s_cluster_sg.id]
     #subnet_ids        = data.aws_subnet_ids.example.ids
     subnet_ids         = [
-      aws_subnet.k8s-private-subnet.id,
-      aws_subnet.k8s-public-subnet.id
+      aws_subnet.k8s-private-subnet[*].id,
+      aws_subnet.k8s-public-subnet[*].id
     ]
   }
 
