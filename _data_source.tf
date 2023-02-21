@@ -12,7 +12,7 @@ data "aws_availability_zones" "available" {}
 #    values = ["private"]
 #  }
 #  #depends_on = [time_sleep.wait_10_seconds_private]
-3}
+#}
 
 #data "aws_subnet_ids" "public" {
 #  vpc_id = aws_vpc.k8s-vpc.id
