@@ -21,5 +21,10 @@ Steps -
 
 9- kubectl exec aws-cli -- aws s3api list-buckets  # list s3 bucket to check s3 access from pod.
 
+# Deploy EBS CSI Driver
+kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=master"
+
+# Verify ebs-csi pods running
+kubectl get pods -n kube-system
 
 
