@@ -96,6 +96,46 @@ resource "aws_eks_node_group" "private-nodes" {
     aws_iam_role_policy_attachment.worker-nodes-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.worker-nodes-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.worker-nodes-AmazonEC2ContainerRegistryReadOnly,
+    aws_subnet.k8s-private-subnet,
+    aws_security_group.k8s_cluster_sg,
+  ]
+}
+
+resource "aws_eks_node_group" "public-nodes" {
+  cluster_name    = aws_eks_cluster.EKS-cluster.name
+  node_group_name = "public-nodes"
+  node_role_arn   = aws_iam_role.worker-nodes.arn
+
+  subnet_ids = data.aws_subnet_ids.public.ids
+
+  capacity_type  = "ON_DEMAND"
+  instance_types = ["t3.small"]
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 5
+    min_size     = 0
+  }
+
+  update_config {
+    max_unavailable = 1
+  }
+
+  remote_access {
+    ec2_ssh_key = "k8s-cluster-key"
+    source_security_group_ids = [
+      aws_security_group.k8s_cluster_sg.id
+    ]
+  }
+
+  labels = {
+    role = "general"
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.worker-nodes-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.worker-nodes-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.worker-nodes-AmazonEC2ContainerRegistryReadOnly,
     aws_subnet.k8s-public-subnet,
     aws_security_group.k8s_cluster_sg,
   ]

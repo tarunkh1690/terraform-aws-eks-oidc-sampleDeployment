@@ -13,6 +13,10 @@ variable "subnet_cidrs" {
   default = []
 }
 
+variable "cluster_name" {
+  default = "EKS-cluster"
+
+}
 
 variable "tags" {
   default = {

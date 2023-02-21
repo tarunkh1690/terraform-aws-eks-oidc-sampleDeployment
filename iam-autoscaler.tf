@@ -22,7 +22,7 @@ resource "aws_iam_role" "eks_cluster_autoscaler" {
 }
 
 resource "aws_iam_policy" "eks_cluster_autoscaler" {
-  name = "eks-cluster-autoscaler"
+  name = "${var.cluster_name}-autoscaler"
 
   policy = jsonencode({
     Statement = [{

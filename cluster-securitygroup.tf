@@ -1,5 +1,5 @@
 resource "aws_security_group" "k8s_cluster_sg" {
-  name        = "EKS-cluster-security-group"
+  name        = "${var.cluster_name}-security-group"
   description = "Cluster communication with worker nodes & bastion"
   vpc_id      = aws_vpc.k8s-vpc.id
 
@@ -11,7 +11,7 @@ resource "aws_security_group" "k8s_cluster_sg" {
   }
 
   tags = {
-    Name = "EKS-cluster-security-group"
+    Name = "${var.cluster_name}-security-group"
   }
 }
 
