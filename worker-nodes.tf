@@ -62,14 +62,14 @@ resource "aws_iam_role_policy_attachment" "worker-nodes-AmazonEBSCSIDriver" {
 }
 
 resource "aws_eks_node_group" "private-nodes" {
-  #count = length(aws_subnet.k8s-private-subnet)
+  count = length(aws_subnet.k8s-private-subnet)
   cluster_name    = aws_eks_cluster.eksass.name
   node_group_name = "private-nodes"
   node_role_arn   = aws_iam_role.worker-nodes.arn
 
-  #subnet_ids = [aws_subnet.k8s-private-subnet[count.index].id]
+  subnet_ids = [aws_subnet.k8s-private-subnet[count.index].id]
   #subnet_ids = data.aws_subnet_ids.private.ids
-  subnet_ids  = aws_subnet.k8s-private-subnet[*].id
+  #subnet_ids  = aws_subnet.k8s-private-subnet[*].id
 
   capacity_type  = "ON_DEMAND"
   instance_types = ["t3.small"]

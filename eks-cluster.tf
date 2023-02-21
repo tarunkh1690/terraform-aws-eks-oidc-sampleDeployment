@@ -23,6 +23,7 @@ resource "aws_iam_role_policy_attachment" "eksass-AmazonEKSClusterPolicy" {
 }
 
 resource "aws_eks_cluster" "eksass" {
+  count = length(data.aws_availability_zones.available.names)
   name     = "eksass"
   role_arn = aws_iam_role.eksass.arn
 
@@ -30,8 +31,8 @@ resource "aws_eks_cluster" "eksass" {
     security_group_ids = [aws_security_group.k8s_cluster_sg.id]
     #subnet_ids        = data.aws_subnet_ids.example.ids
     subnet_ids         = [
-      aws_subnet.k8s-private-subnet[*].id,
-      aws_subnet.k8s-public-subnet[*].id
+      aws_subnet.k8s-private-subnet[count.index].id,
+      aws_subnet.k8s-public-subnet[count.index].id
     ]
   }
 
