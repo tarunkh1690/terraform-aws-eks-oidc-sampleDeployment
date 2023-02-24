@@ -143,6 +143,7 @@ resource "aws_eks_node_group" "private-nodes" {
   #   value  = "Public"
   #   effect = "NO_SCHEDULE"
   # }
+  
 
   depends_on = [
     aws_iam_role_policy_attachment.worker-nodes-AmazonEKSWorkerNodePolicy,
