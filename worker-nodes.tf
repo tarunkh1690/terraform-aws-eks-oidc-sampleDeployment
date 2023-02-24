@@ -138,11 +138,11 @@ resource "aws_eks_node_group" "private-nodes" {
     role = "general"
   }
 
-  taint {
-     key    = "application"
-     value  = "Public"
-     effect = "NO_SCHEDULE"
-   }
+  #taint {
+  #   key    = "application"
+  #   value  = "Public"
+  #   effect = "NO_SCHEDULE"
+  # }
 
   depends_on = [
     aws_iam_role_policy_attachment.worker-nodes-AmazonEKSWorkerNodePolicy,
