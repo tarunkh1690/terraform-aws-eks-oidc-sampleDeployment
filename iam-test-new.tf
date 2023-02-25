@@ -47,6 +47,7 @@ resource "aws_iam_role" "test_oidc" {
       }]
       Version = "2012-10-17"
     }) 
+  }    
 }
 
 #resource "aws_iam_policy" "test-policy" {
