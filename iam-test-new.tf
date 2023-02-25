@@ -21,16 +21,32 @@ resource "aws_iam_role" "test_oidc" {
   #assume_role_policy = aws_iam_policy.test-policy.name 
   name               = "test-oidc"
   assume_role_policy = jsonencode({
-    Statement = [{
-      Action = [
-        "s3:ListAllMyBuckets",
-        "s3:GetBucketLocation"
-      ]
-      Effect   = "Allow"
-      Resource = "arn:aws:s3:::*"
-    }]
     Version = "2012-10-17"
-  }) 
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+  
+  inline_policy {
+    name = "my_inline_policy"
+    policy =   jsonencode({
+      Statement = [{
+        Action = [
+          "s3:ListAllMyBuckets",
+          "s3:GetBucketLocation"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:s3:::*"
+      }]
+      Version = "2012-10-17"
+    }) 
 }
 
 #resource "aws_iam_policy" "test-policy" {
