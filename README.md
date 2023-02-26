@@ -11,7 +11,7 @@ Steps -
 
 4- terraform apply
 
-5- aws eks --region region-name update-kubeconfig --name cluster-name # replace regin & cluster_name.
+5- aws eks --region region-name update-kubeconfig --name cluster-name # replace region & cluster_name.
 
 6- kubectl get svc # to check cluster access
 
