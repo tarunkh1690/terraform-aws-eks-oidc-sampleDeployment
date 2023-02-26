@@ -10,7 +10,7 @@ resource "aws_route_table" "k8s-private-rt" {
   }
 
   tags = {
-    Name = "k8s-private-rt"
+    Name = "${var.cluster_name}-private-rt"
   }
   depends_on = [aws_subnet.k8s-private-subnet]
 }
@@ -38,7 +38,7 @@ resource "aws_route_table" "k8s-public-rt" {
   }
 
   tags = {
-    Name = "k8s-public-rt"
+    Name = "${var.cluster_name}-public-rt"
   }
   depends_on = [aws_subnet.k8s-public-subnet]
 }

@@ -6,6 +6,6 @@ resource "aws_vpc" "k8s-vpc" {
   instance_tenancy     = "default"
 
   tags = {
-    Name = "k8s-vpc"
+    Name = "${var.cluster_name}-vpc"
   }
 }

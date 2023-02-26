@@ -3,7 +3,7 @@ resource "aws_eip" "k8s-nat" {
   vpc = true
 
   tags = {
-    Name = "k8s-nat"
+    Name = "${var.cluster_name}-nat"
   }
 }
 
@@ -12,7 +12,7 @@ resource "aws_nat_gateway" "k8s-nat" {
   subnet_id     = aws_subnet.k8s-public-subnet[0].id
 
   tags = {
-    Name = "k8s-nat"
+    Name = "${var.cluster_name}-nat"
   }
 
   depends_on = [aws_internet_gateway.k8s-igw]

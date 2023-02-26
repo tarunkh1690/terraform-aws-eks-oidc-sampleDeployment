@@ -8,10 +8,10 @@ resource "aws_subnet" "k8s-private-subnet" {
   depends_on              = [aws_vpc.k8s-vpc]
 
   tags = {
-    Name                           = "k8s-private-subnet-${data.aws_availability_zones.available.names[count.index]}"
+    Name                           = "${var.cluster_name}-private-subnet-${data.aws_availability_zones.available.names[count.index]}"
     subnet-type                    = "private"
-    kubernetes-role-elb            = "1"
-    kubernetes-cluster-EKS-cluster = "owned"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/${var.cluster_name}"    = "owned"
   }
 }
 
@@ -26,9 +26,9 @@ resource "aws_subnet" "k8s-public-subnet" {
   depends_on              = [aws_vpc.k8s-vpc]
 
   tags = {
-    Name                           = "k8s-public-subnet-${data.aws_availability_zones.available.names[count.index]}"
+    Name                           = "${var.cluster_name}-public-subnet-${data.aws_availability_zones.available.names[count.index]}"
     subnet-type                    = "public"
-    kubernetes-role-elb            = "1"
-    kubernetes-cluster-EKS-cluster = "owned"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/${var.cluster_name}"    = "owned"
   }
 }
